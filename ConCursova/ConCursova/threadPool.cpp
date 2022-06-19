@@ -15,6 +15,7 @@
 
 ThreadPool::ThreadPool(const size_t thread_count)
 {
+    std::cout << "Num of threads: " << thread_count << std::endl;
     threads.reserve(thread_count);
     try
     {
@@ -40,17 +41,21 @@ ThreadPool::~ThreadPool()
     stopThreads();
 }
 
-void ThreadPool::submit(std::function<void()> funct)
+void ThreadPool::submit(std::function<void(int, int, std::function<double(int, int)>)> funct, int i, int j, std::function<double(int, int)> value)
 {
-    workQueue.push(std::move(funct));
+    workQueue.push(std::move(funct), i , j, value);
 }
 
 void ThreadPool::executeTasks()
 {
     while (run)
     {
-        std::function<void()> task = workQueue.pop();
-        task();
+        task = workQueue.pop();
+        i = workQueue.popI();
+        j = workQueue.popJ();
+        value = workQueue.popValue();
+        task(i,j, value(i,j));
+        ++doneTasks;
     }
 }
 

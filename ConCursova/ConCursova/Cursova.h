@@ -3,6 +3,7 @@
 #include <iostream>
 #include <vector>
 
+#include "threadPool.h"
 #include "Matrix.h"
 
 
@@ -16,6 +17,7 @@ public:
 	void printMatrix();
 	void simpleMultiplication();//множення послідовне
 	void multihMultiplication();
+	void setNumOfTask();
 	
 private:
 	bool checkResult();
@@ -37,13 +39,12 @@ private:
 	Matrix B;
 	Matrix C;
 	Matrix D;
-
+	const static size_t numOfThreads = 4;
 	unsigned int simpleMult = 0;
 	unsigned int multMult = 0;
 	bool status = false;
-
+	ThreadPool threadpool;
 	int a = 0;
 	void plusplus(int i);
-	int numOfThreads = 0;
+	
 };
-

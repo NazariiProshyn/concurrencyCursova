@@ -142,10 +142,14 @@
     <ClCompile Include="ConCursova.cpp" />
     <ClCompile Include="Cursova.cpp" />
     <ClCompile Include="Matrix.cpp" />
+    <ClCompile Include="threadPool.cpp" />
+    <ClCompile Include="threadSafeQueue.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Cursova.h" />
     <ClInclude Include="Matrix.h" />
+    <ClInclude Include="threadPool.h" />
+    <ClInclude Include="threadSafeQueue.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

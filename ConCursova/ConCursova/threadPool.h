@@ -50,7 +50,9 @@ public:
      * 
      * @param funct     Function that is added to the execution queue
      */
-    void submit(std::function<void()> funct);
+    void submit(std::function<void(int, int, std::function<double(int, int)>)> funct, int i, int j, std::function<double(int, int)> value);
+    void setNumOfTasks(int num) { allTasks = num; };
+    bool cheskStatusofTasks(){return doneTasks >= allTasks; }
 
 private:
 
@@ -76,4 +78,9 @@ private:
 
     // Thread-safe queue of tasks
     ThreadSafeQueue workQueue;
+    int doneTasks = 0;
+    int allTasks  = 0;
+    std::function<void(int, int, std::function<double(int, int)>)> task;
+    int i, j;
+    std::function<double(int, int)> value;
 };

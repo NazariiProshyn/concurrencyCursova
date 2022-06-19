@@ -1,5 +1,6 @@
 #include "Cursova.h"
 #include <iostream>
+
 int main()
 {
 	int numOfThreads = 0;
@@ -13,6 +14,7 @@ int main()
 		if (cursova.inputSize())
 		{
 			cursova.creatingMatrixs();
+			cursova.setNumOfTask();
 			cursova.simpleMultiplication();
 			cursova.multihMultiplication();
 		}

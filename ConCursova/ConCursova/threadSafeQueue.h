@@ -43,7 +43,7 @@ public:
      * 
      * @param funct     New item for push 
      */
-	void push(std::function<void()> funct);
+	void push(std::function<void(int, int, std::function<double(int, int)>)> funct, int i, int j, std::function<double(int,int)>);
 
     /**
      * @brief     Delete first item from
@@ -51,7 +51,10 @@ public:
      * 
      * @return    First item in the queue
      */
-	std::function<void()> pop();
+    std::function<void(int, int, std::function<double(int, int)>)> pop();
+    int popI();
+    int popJ();
+    std::function<double(int, int)> popValue();
 
     /**
      * @brief             Returns the number of 
@@ -69,7 +72,10 @@ private:
     mutable std::mutex mut;
 
     // Queue of functions
-    std::queue<std::function<void()>> dataQueue;
+    std::queue<std::function<void(int, int, std::function<double(int, int)>)>> dataQueue;
+    std::queue<int> iQueue;
+    std::queue<int> jQueue;
+    std::queue<std::function<double(int, int)>> valueQueue;
 
     // Notifies that an item has been added to the queue
     std::condition_variable condVar;

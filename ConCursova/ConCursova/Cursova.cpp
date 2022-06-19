@@ -22,7 +22,7 @@ namespace NSPathAndNames
 
 
 
-Cursova::Cursova(int threads):numOfThreads(threads)
+Cursova::Cursova(int threads):threadpool(threads)
 {
 	std::cout << "Glory to Ukraine!\n";
 }
@@ -141,16 +141,34 @@ int plus(int i)
 	std::cout << a << ' ' << i << '\n';
 	return 0;
 }
+void funct(std::function<void(Cursova&, int)>) {
+	
+	//std::cout << ++i;
+}
+
+
 
  void Cursova::multihMultiplication()
 {	
 	unsigned int start_time = clock();
-	
+	for (size_t i = 0; i < C.getRaws(); ++i)
+	{
+		for (size_t j = 0; j < C.getColumns(); ++j)
+		{
+			threadpool.submit(D.setElement(i, j, scalarMult(i, j)));
+		}
+	}
+	while (!threadpool.cheskStatusofTasks()) {}
 	unsigned int end_time = clock();
 	multMult = end_time - start_time;
 	std::cout << "Mult Multiplication: " << multMult << '\n';
 	status = checkResult();
 }
+
+ void Cursova::setNumOfTask()
+ {
+	 threadpool.setNumOfTasks(C.getColumns() * C.getRaws());
+ }
 
  bool Cursova::checkResult()
  {
